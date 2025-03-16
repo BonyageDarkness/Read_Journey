@@ -2,7 +2,7 @@ import { lazy, Suspense, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer, Bounce } from "react-toastify";
 
-import styles from "./App.module.css";
+import styles from "./App.module.scss";
 
 const LoginPage = lazy(() => import("../../pages/Login/LoginPage"));
 const SignupPage = lazy(() => import("../../pages/Registration/SignUpPage"));

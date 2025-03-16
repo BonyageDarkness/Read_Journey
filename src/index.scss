@@ -1,3 +1,17 @@
+@import "./styles/mixins.scss";
+
+@font-face {
+  font-family: "Gilroy";
+  font-weight: 400;
+  src: url("./assets/fonts/Gilroy-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Gilroy";
+  font-weight: 700;
+  src: url("./assets/fonts/Gilroy-Bold.woff2") format("woff2");
+}
+
 :root {
   font-family: Gilroy, sans-serif;
   line-height: 1.5;
@@ -56,9 +70,11 @@ a {
 a:hover {
   color: #535bf2;
 }
-
+html {
+  background: #141414 !important;
+}
 body {
-  font-family: Gilroy, sans-serif;
+  font-family: "Gilroy", sans-serif;
   margin: 0;
 }
 
