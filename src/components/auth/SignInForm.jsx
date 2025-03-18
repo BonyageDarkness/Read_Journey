@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import styles from "./SignForm.module.scss";
 import iphone1x from "../../img/main/iPhone15Black1.jpg";
@@ -59,10 +60,14 @@ export default function LoginForm() {
     <div className={styles.signContainer}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.logoContainer}>
-          <svg className={styles.icon}>
-            <use href="/sprite.svg#icon-Frame-8" />
-          </svg>
-          <span className={styles.logoText}>READ JOURNEY</span>
+          <Link to="/signin" className={styles.logo}>
+            <div className={styles.logoContainer}>
+              <svg className={styles.icon}>
+                <use href="/sprite.svg#icon-Frame-8" />
+              </svg>
+              <span className={styles.logoText}>READ JOURNEY</span>
+            </div>
+          </Link>
         </div>
 
         <h2 className={styles.title}>

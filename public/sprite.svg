@@ -19,5 +19,18 @@
 <symbol id="icon-pajamas_error" viewBox="0 0 32 32">
 <path fill="#e90516" style="fill: var(--color3, #e90516)" d="M16 29c-3.448 0-6.754-1.37-9.192-3.808s-3.808-5.745-3.808-9.192 1.37-6.754 3.808-9.192c2.438-2.438 5.745-3.808 9.192-3.808s6.755 1.37 9.192 3.808c2.438 2.438 3.808 5.745 3.808 9.192s-1.37 6.755-3.808 9.192c-2.438 2.438-5.745 3.808-9.192 3.808zM16 32c4.243 0 8.313-1.686 11.314-4.686s4.686-7.070 4.686-11.314c0-4.243-1.686-8.313-4.686-11.314s-7.070-4.686-11.314-4.686c-4.243 0-8.313 1.686-11.314 4.686s-4.686 7.070-4.686 11.314c0 4.243 1.686 8.313 4.686 11.314s7.070 4.686 11.314 4.686zM18 22c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586-1.039-0.211-1.414-0.586c-0.375-0.375-0.586-0.884-0.586-1.414s0.211-1.039 0.586-1.414c0.375-0.375 0.884-0.586 1.414-0.586s1.039 0.211 1.414 0.586c0.375 0.375 0.586 0.884 0.586 1.414zM17.5 9.5c0-0.398-0.158-0.779-0.439-1.061s-0.663-0.439-1.061-0.439c-0.398 0-0.779 0.158-1.061 0.439s-0.439 0.663-0.439 1.061v7c0 0.398 0.158 0.779 0.439 1.061s0.663 0.439 1.061 0.439c0.398 0 0.779-0.158 1.061-0.439s0.439-0.663 0.439-1.061v-7z"></path>
 </symbol>
+<symbol id="icon-menu-04" viewBox="0 0 32 32">
+<path fill="none" stroke="#f9f9f9" style="stroke: var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M4 16h24M4 8h24M12 24h16"></path>
+</symbol>
+<symbol id="icon-x" viewBox="0 0 32 32">
+<path fill="none" stroke="#f9f9f9" style="stroke: var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M24 8l-16 16"></path>
+<path fill="none" stroke="#f9f9f9" style="stroke: var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M8 8l16 16"></path>
+</symbol>
+<symbol id="icon-Vector-7" viewBox="0 0 568 32">
+<path fill="none" stroke="#4f92f7" strokeWidth="3" style="stroke: var(--color1, #4f92f7)" stroke-linejoin="miter" stroke-linecap="round" stroke-miterlimit="4" stroke-width="24" d="M12 16h544"></path>
+</symbol>
+<symbol id="icon-Vector-6" viewBox="0 0 368 32">
+<path fill="none" stroke="#4f92f7" style="stroke: var(--color1, #4f92f7)" stroke-linejoin="miter" stroke-linecap="round" stroke-miterlimit="4" stroke-width="24" d="M12 16h344"></path>
+</symbol>
 </defs>
 </svg>

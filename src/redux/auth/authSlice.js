@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { registerUser, loginUser } from "./authOperations";
 
+const savedUser = JSON.parse(localStorage.getItem("user"));
+const savedToken = localStorage.getItem("token");
+
 const initialState = {
-  user: null,
-  token: null,
-  isLoggedIn: false,
+  user: savedUser || null,
+  token: savedToken || null,
+  isLoggedIn: !!savedToken,
   isLoading: false,
   error: null,
 };
@@ -17,6 +20,14 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isLoggedIn = false;
+      localStorage.removeItem("token");
+      localStorage.removeItem("logoutTime");
+    },
+    setToken: (state, action) => {
+      state.token = action.payload;
+      state.isLoggedIn = true;
+      localStorage.setItem("token", action.payload);
+      localStorage.setItem("logoutTime", Date.now() + 60 * 60 * 1000);
     },
   },
   extraReducers: (builder) => {
@@ -26,10 +37,11 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+        localStorage.setItem("token", action.payload.token);
+        localStorage.setItem("logoutTime", Date.now() + 60 * 60 * 1000);
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -40,10 +52,11 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+        localStorage.setItem("token", action.payload.token);
+        localStorage.setItem("logoutTime", Date.now() + 60 * 60 * 1000);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
