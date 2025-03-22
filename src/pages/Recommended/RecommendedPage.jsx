@@ -4,14 +4,18 @@ import styles from "./RecommendedPage.module.scss";
 
 import Header from "../../components/Header/Header";
 import Dashboard from "../../components/Dashboard/Dashboard";
+import RecommendedBooks from "../../components/RecommendedBooks/RecommendedBooks";
 
 export default function RecommendedPage() {
   return (
     <>
       <div className={styles.containerRecommended}>
         <Header />
-        <Dashboard />
-        <Suspense fallback={<div>Загрузка...</div>}></Suspense>
+        <div className={styles.contentRecommended}>
+          <Dashboard />
+          <RecommendedBooks />
+          <Suspense fallback={<div>Загрузка...</div>}></Suspense>
+        </div>
       </div>
     </>
   );

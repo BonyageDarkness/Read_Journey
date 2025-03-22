@@ -1,10 +1,19 @@
 import styles from "./Dashboard.module.scss";
 import book1x from "../../img/dashboard/book.png";
 import book2x from "../../img/dashboard/book@2x.png";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { setFilters } from "../../redux/filters/filtersSlice";
 
 export default function Dashboard() {
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSearch = () => {
+    dispatch(setFilters({ title, author }));
+  };
+
   return (
     <div className={styles.dashboardContainer}>
       <form className={styles.filterForm} onSubmit={(e) => e.preventDefault()}>
@@ -16,6 +25,8 @@ export default function Dashboard() {
             type="text"
             placeholder="Enter text"
             className={styles.filterInput}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
 
@@ -25,10 +36,16 @@ export default function Dashboard() {
             type="text"
             placeholder="Enter text"
             className={styles.filterInput}
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
 
-        <button type="submit" className={styles.filterSubmit}>
+        <button
+          type="submit"
+          className={styles.filterSubmit}
+          onClick={handleSearch}
+        >
           To apply
         </button>
       </form>
