@@ -55,9 +55,35 @@ export const addBookToLibrary = createAsyncThunk(
       const response = await axios.post("/books/add", bookData);
       return response.data;
     } catch (error) {
-      console.error("📛 addBookToLibrary error:", error.response?.data);
       return rejectWithValue(
         error.response?.data?.message || "Failed to add book"
+      );
+    }
+  }
+);
+export const addRecommendedBookById = createAsyncThunk(
+  "books/addRecommendedBookById",
+  async (bookId, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`/books/add/${bookId}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to add recommended book"
+      );
+    }
+  }
+);
+
+export const removeBookFromLibrary = createAsyncThunk(
+  "books/removeBookFromLibrary",
+  async (id, { rejectWithValue }) => {
+    try {
+      await axios.delete(`/books/remove/${id}`);
+      return id;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to remove book"
       );
     }
   }

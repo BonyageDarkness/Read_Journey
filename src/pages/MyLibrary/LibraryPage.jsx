@@ -4,21 +4,17 @@ import styles from "./LibraryPage.module.scss";
 
 import Header from "../../components/Header/Header";
 import Dashboard from "../../components/Dashboard/Dashboard";
-import RecommendedBooks from "../../components/RecommendedBooks/RecommendedBooks";
+
 import MyLibraryBooks from "../../components/Reading/MyLibraryBooks";
 
-export default function RecommendedPage() {
+export default function LibraryPage() {
   return (
-    <>
-      <div className={styles.containerRecommended}>
-        <Header />
-        <div className={styles.contentRecommended}>
-          <Dashboard />
-          <RecommendedBooks />
-          <MyLibraryBooks />
-          <Suspense fallback={<div>Загрузка...</div>}></Suspense>
-        </div>
+    <div className={styles.containerLibrary}>
+      <Header />
+      <div className={styles.contentLibrary}>
+        <Dashboard page="library" />
+        <MyLibraryBooks />
       </div>
-    </>
+    </div>
   );
 }

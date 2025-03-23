@@ -3,6 +3,7 @@ import {
   fetchRecommendedBooks,
   fetchUserBooks,
   addBookToLibrary,
+  removeBookFromLibrary,
 } from "./booksOperations";
 
 const booksSlice = createSlice({
@@ -40,6 +41,11 @@ const booksSlice = createSlice({
       })
       .addCase(addBookToLibrary.fulfilled, (state, action) => {
         state.userBooks.push(action.payload);
+      })
+      .addCase(removeBookFromLibrary.fulfilled, (state, action) => {
+        state.userBooks = state.userBooks.filter(
+          (book) => book._id !== action.payload
+        );
       });
   },
 });

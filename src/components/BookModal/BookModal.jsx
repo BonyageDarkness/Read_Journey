@@ -1,24 +1,39 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+
 import styles from "./BookModal.module.scss";
-import { useDispatch } from "react-redux";
-import { addBookToLibrary } from "../../redux/books/booksOperations";
+import img from "../../img/modal/like.png";
+import img2 from "../../img/modal/like@2x.png";
+import img3 from "../../img/modal/like-big.png";
+import img4 from "../../img/modal/like-big@2x.png";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserBooks } from "../../redux/books/booksSelectors";
+import { addRecommendedBookById } from "../../redux/books/booksOperations";
 import { toast } from "react-toastify";
 
 export default function BookModal({ book, onClose }) {
   const dispatch = useDispatch();
+  const [isComplete, setIsComplete] = useState(false);
+  const userBooks = useSelector(selectUserBooks);
 
   const handleAddToLibrary = async () => {
     try {
-      console.log("📘 book object:", book);
-      const payload = {
-        title: book.title,
-        author: book.author,
-        totalPages: book.totalPages || book.pages || 1,
-      };
-      console.log("Payload to send:", payload);
-      await dispatch(addBookToLibrary(payload)).unwrap();
+      if (!book._id) {
+        toast.error("No book ID provided");
+        return;
+      }
+
+      const isAlreadyInLibrary = userBooks.some(
+        (b) => b.title === book.title && b.author === book.author
+      );
+
+      if (isAlreadyInLibrary) {
+        toast.warn("This book is already in your library");
+        return;
+      }
+
+      await dispatch(addRecommendedBookById(book._id)).unwrap();
+      setIsComplete(true);
       toast.success("Book added to library!");
-      onClose();
     } catch (error) {
       toast.error(error || "Failed to add book");
     }
@@ -39,21 +54,52 @@ export default function BookModal({ book, onClose }) {
 
   return (
     <div className={styles.backdrop} onClick={handleBackdropClick}>
-      <div className={styles.modal}>
+      <div
+        className={`${styles.modal} ${isComplete ? styles.modalComplete : ""}`}
+      >
         <button className={styles.closeBtn} onClick={onClose}>
           <svg className={styles.icon}>
             <use href="/sprite.svg#icon-x" />
           </svg>
         </button>
 
-        <img src={book.imageUrl} alt={book.title} className={styles.image} />
-        <h2 className={styles.title}>{book.title}</h2>
-        <p className={styles.author}>{book.author}</p>
-        <p className={styles.pages}>{book.totalPages} pages</p>
+        {!isComplete ? (
+          <>
+            <img
+              src={book.imageUrl}
+              alt={book.title}
+              className={styles.image}
+            />
+            <h2 className={styles.title}>{book.title}</h2>
+            <p className={styles.author}>{book.author}</p>
+            <p className={styles.pages}>{book.totalPages} pages</p>
 
-        <button className={styles.addBtn} onClick={handleAddToLibrary}>
-          Add to library
-        </button>
+            <button className={styles.addBtn} onClick={handleAddToLibrary}>
+              Add to library
+            </button>
+          </>
+        ) : (
+          <div className={styles.complete}>
+            <img
+              src={img}
+              srcSet={`${img} 1x, ${img2} 2x`}
+              alt="like"
+              className={styles.completeIconLike}
+            />
+            <img
+              src={img3}
+              srcSet={`${img3} 1x, ${img4} 2x`}
+              alt="like"
+              className={styles.completeIconLikeTablet}
+            />
+            <h2>Good job</h2>
+            <p>
+              Your book is now in{" "}
+              <span className={styles.span}>the library!</span> The joy knows no
+              bounds and now you can start your training
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

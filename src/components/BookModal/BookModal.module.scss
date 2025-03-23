@@ -16,7 +16,7 @@
 .modal {
   width: 100%;
   max-width: 335px;
-  padding: 40px 97px;
+  padding: 40px 46px;
   border-radius: 12px;
   border: 1px solid rgba(104, 104, 104, 0.2);
   background: #1f1f1f;
@@ -30,10 +30,16 @@
   scrollbar-width: none;
   @include tablet {
     max-width: 500px;
-    padding: 40px 169px;
+    padding: 40px 50px;
   }
   @include desktop {
-    padding: 50px 169px;
+    padding: 50px 50px;
+  }
+
+  &.modalComplete {
+    @include tablet {
+      max-width: 342px;
+    }
   }
 }
 
@@ -125,5 +131,78 @@
     margin-top: 32px;
     font-size: 16px;
     letter-spacing: 0.32px;
+  }
+}
+
+.complete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px 0;
+  @include tablet {
+    margin: 10px 0;
+  }
+  @include desktop {
+    margin: 0;
+  }
+}
+
+.completeIconLike {
+  width: 50px;
+  height: 50px;
+  @include tablet {
+    display: none;
+  }
+}
+
+.completeIconLikeTablet {
+  display: none;
+  @include tablet {
+    display: block;
+    width: 68px;
+    height: 68px;
+  }
+}
+
+.complete h2 {
+  color: #f9f9f9;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
+  letter-spacing: -0.36px;
+  margin-top: 20px;
+  @include tablet {
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: -0.4px;
+    margin-top: 32px;
+  }
+}
+
+.complete p {
+  color: #686868;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px; /* 128.571% */
+  letter-spacing: -0.28px;
+  margin-top: 14px;
+  @include desktop {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -0.28px;
+  }
+}
+
+.span {
+  color: #f9f9f9;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px; /* 128.571% */
+  letter-spacing: -0.28px;
+  @include desktop {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -0.28px;
   }
 }

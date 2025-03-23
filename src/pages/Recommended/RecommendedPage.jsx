@@ -12,7 +12,8 @@ export default function RecommendedPage() {
       <div className={styles.containerRecommended}>
         <Header />
         <div className={styles.contentRecommended}>
-          <Dashboard />
+          <Dashboard page="recommended" />
+
           <RecommendedBooks />
           <Suspense fallback={<div>Загрузка...</div>}></Suspense>
         </div>
