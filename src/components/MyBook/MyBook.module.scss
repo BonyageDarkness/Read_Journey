@@ -1,0 +1,27 @@
+.myBookContainer {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+.bookImage {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.author {
+  font-size: 16px;
+  opacity: 0.7;
+}
+.pages {
+  font-size: 14px;
+  opacity: 0.5;
+}

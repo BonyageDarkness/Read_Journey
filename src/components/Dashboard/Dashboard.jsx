@@ -6,6 +6,7 @@ import { useState } from "react";
 import { setFilters } from "../../redux/filters/filtersSlice";
 import AddBookForm from "../AddBookForm/AddBookForm";
 import RecommendedBlock from "../RecommendedBlock/RecommendedBlock";
+import MyBook from "../MyBook/MyBook";
 
 export default function Dashboard({ page }) {
   const [title, setTitle] = useState("");
@@ -116,6 +117,11 @@ export default function Dashboard({ page }) {
         <>
           <AddBookForm />
           <RecommendedBlock />
+        </>
+      )}
+      {page === "reading" && (
+        <>
+          <MyBook />
         </>
       )}
     </div>

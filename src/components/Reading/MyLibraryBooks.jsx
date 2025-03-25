@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Listbox } from "@headlessui/react";
 import { ChevronDown } from "lucide-react";
 import { selectReadingStatus } from "../../redux/readingFilter/readingFilterSelectors";
 import { setReadingStatus } from "../../redux/readingFilter/readingFilterSlice";
+import { setCurrentReadingBook } from "../../redux/reading/readingSlice";
 import { fetchUserBooks } from "../../redux/books/booksOperations";
 import { selectUserBooks } from "../../redux/books/booksSelectors";
 import { removeBookFromLibrary } from "../../redux/books/booksOperations";
@@ -21,6 +23,7 @@ export default function MyLibraryBooks() {
   const books = useSelector(selectUserBooks);
   const [selectedBook, setSelectedBook] = useState(null);
   const [bookDetails, setBookDetails] = useState({});
+  const navigate = useNavigate();
 
   const statuses = [
     { value: "unread", label: "Unread" },
@@ -156,11 +159,16 @@ export default function MyLibraryBooks() {
       </ul>
 
       {selectedBook && (
-        <BookModal book={selectedBook} onClose={handleCloseModal}>
-          <button className={styles.readButton} onClick={goToReadingPage}>
-            Start reading
-          </button>
-        </BookModal>
+        <BookModal
+          book={selectedBook}
+          onClose={handleCloseModal}
+          buttonText="Start reading"
+          onButtonClick={() => {
+            dispatch(setCurrentReadingBook(selectedBook));
+            handleCloseModal();
+            navigate("/reading");
+          }}
+        />
       )}
     </div>
   );

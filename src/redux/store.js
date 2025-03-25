@@ -3,6 +3,7 @@ import authReducer from "./auth/authSlice";
 import booksReducer from "./books/booksSlice";
 import filtersReducer from "./filters/filtersSlice";
 import readingFilterReducer from "./readingFilter/readingFilterSlice";
+import readingReducer from "./reading/readingSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     books: booksReducer,
     filters: filtersReducer,
     readingFilter: readingFilterReducer,
+    reading: readingReducer,
   },
 });
 

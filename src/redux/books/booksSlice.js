@@ -15,6 +15,7 @@ const booksSlice = createSlice({
     currentPage: 1,
     isLoading: false,
     error: null,
+    currentReadingBook: null,
   },
   reducers: {
     setCurrentPage: (state, action) => {

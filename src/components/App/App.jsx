@@ -14,6 +14,8 @@ const RecommendedPage = lazy(() =>
   import("../../pages/Recommended/RecommendedPage")
 );
 const LibraryPage = lazy(() => import("../../pages/MyLibrary/LibraryPage"));
+const ReadingPage = lazy(() => import("../../pages/Reading/ReadingPage"));
+
 function App() {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
@@ -54,6 +56,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/recommended" element={<RecommendedPage />} />
             <Route path="/library" element={<LibraryPage />} />
+            <Route path="/reading" element={<ReadingPage />} />
           </Routes>
         </div>
       </Suspense>

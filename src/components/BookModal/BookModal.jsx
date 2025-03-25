@@ -10,7 +10,12 @@ import { selectUserBooks } from "../../redux/books/booksSelectors";
 import { addRecommendedBookById } from "../../redux/books/booksOperations";
 import { toast } from "react-toastify";
 
-export default function BookModal({ book, onClose }) {
+export default function BookModal({
+  book,
+  onClose,
+  buttonText = "Add to library",
+  onButtonClick,
+}) {
   const dispatch = useDispatch();
   const [isComplete, setIsComplete] = useState(false);
   const userBooks = useSelector(selectUserBooks);
@@ -74,8 +79,8 @@ export default function BookModal({ book, onClose }) {
             <p className={styles.author}>{book.author}</p>
             <p className={styles.pages}>{book.totalPages} pages</p>
 
-            <button className={styles.addBtn} onClick={handleAddToLibrary}>
-              Add to library
+            <button className={styles.addBtn} onClick={onButtonClick}>
+              {buttonText}
             </button>
           </>
         ) : (
