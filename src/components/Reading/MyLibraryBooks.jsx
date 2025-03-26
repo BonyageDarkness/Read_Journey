@@ -165,6 +165,8 @@ export default function MyLibraryBooks() {
           buttonText="Start reading"
           onButtonClick={() => {
             dispatch(setCurrentReadingBook(selectedBook));
+            localStorage.setItem("readingBook", JSON.stringify(selectedBook));
+
             handleCloseModal();
             navigate("/reading");
           }}

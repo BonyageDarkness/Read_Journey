@@ -1,7 +1,11 @@
 // redux/reading/readingSlice.js
 import { createSlice } from "@reduxjs/toolkit";
-import { startReading, stopReading } from "./readingOperations";
-import { deleteReadingEntry } from "./readingOperations";
+import {
+  startReading,
+  stopReading,
+  getReadingProgress,
+  deleteReadingEntry,
+} from "./readingOperations";
 
 const initialState = {
   currentBook: null,
@@ -9,6 +13,8 @@ const initialState = {
   statistics: null,
   isLoading: false,
   error: null,
+  currentProgress: null,
+  readingStatus: "idle",
 };
 
 const readingSlice = createSlice({
@@ -32,8 +38,11 @@ const readingSlice = createSlice({
       })
       .addCase(startReading.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.diary.push(action.payload);
+
+        state.currentProgress = action.payload;
+        state.readingStatus = "active"; // ✅ активное чтение
       })
+
       .addCase(startReading.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
@@ -44,9 +53,12 @@ const readingSlice = createSlice({
       })
       .addCase(stopReading.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.diary.push(action.payload); // финальное событие
+        state.diary = action.payload.progress;
         state.statistics = action.payload.statistics || null;
+        state.currentProgress = null;
+        state.readingStatus = "finished"; // ✅ чтение завершено
       })
+
       .addCase(stopReading.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
@@ -55,6 +67,13 @@ const readingSlice = createSlice({
         state.diary = state.diary.filter(
           (entry) => entry._id !== action.payload
         );
+      })
+      .addCase(getReadingProgress.fulfilled, (state, action) => {
+        const book = action.payload;
+        state.diary = book.progress || [];
+        state.currentProgress =
+          book.progress.find((p) => p.status === "active") || null;
+        state.readingStatus = state.currentProgress ? "active" : "finished";
       });
   },
 });

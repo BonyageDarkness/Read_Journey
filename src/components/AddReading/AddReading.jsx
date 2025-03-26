@@ -1,16 +1,25 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import styles from "./AddReading.module.scss";
 import {
   startReading,
   stopReading,
 } from "../../redux/reading/readingOperations";
+import {
+  selectReadingStatus,
+  selectCurrentProgress,
+  selectCurrentReadingBook,
+} from "../../redux/reading/readingSelectors";
 
 export default function AddReading({ bookId }) {
   const [page, setPage] = useState("");
-  const [isReading, setIsReading] = useState(false); // Локальное состояние для кнопки
   const dispatch = useDispatch();
+
+  const readingStatus = useSelector(selectReadingStatus);
+  const isReading = readingStatus === "active";
+  const currentBook = useSelector(selectCurrentReadingBook);
+  const currentProgress = useSelector(selectCurrentProgress);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -20,9 +29,20 @@ export default function AddReading({ bookId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!currentBook) {
+      toast.error("No current book");
+      return;
+    }
+
     const pageNum = parseInt(page);
+
     if (!page || isNaN(pageNum) || pageNum <= 0) {
       toast.error("Enter a valid page number");
+      return;
+    }
+
+    if (pageNum > currentBook.totalPages) {
+      toast.error("Page number exceeds total pages");
       return;
     }
 
@@ -30,18 +50,24 @@ export default function AddReading({ bookId }) {
       if (!isReading) {
         await dispatch(startReading({ bookId, page: pageNum })).unwrap();
         toast.success("Started reading");
-        setIsReading(true);
       } else {
+        // ✅ Валидация: finishPage > startPage
+        if (pageNum <= currentProgress?.startPage) {
+          toast.error("The finish page can't be less than the start page");
+          return;
+        }
+
         const result = await dispatch(
           stopReading({ bookId, page: pageNum })
         ).unwrap();
-        toast.success("Stopped reading");
-        setIsReading(false);
 
-        if (result.finished) {
-          // например: result.finished === true
+        toast.success("Stopped reading");
+
+        if (
+          result.status === "finished" ||
+          pageNum === currentBook.totalPages
+        ) {
           toast.info("You've finished the book!");
-          // тут можно открыть модалку, если она будет
         }
       }
 
@@ -63,6 +89,7 @@ export default function AddReading({ bookId }) {
           placeholder="Enter page number"
         />
       </label>
+
       <button type="submit" className={styles.button}>
         {isReading ? "To stop" : "To start"}
       </button>

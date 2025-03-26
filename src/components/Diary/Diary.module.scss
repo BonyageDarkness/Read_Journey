@@ -1,0 +1,48 @@
+@import "../../styles/mixins.scss";
+
+.diaryCard {
+  background: #1e1e1e;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.dateRow {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.detailsRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.percent,
+.time,
+.speed {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  color: #888;
+
+  &:hover {
+    color: red;
+  }
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  fill: white;
+}

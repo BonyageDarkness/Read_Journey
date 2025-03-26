@@ -79,7 +79,18 @@ export default function BookModal({
             <p className={styles.author}>{book.author}</p>
             <p className={styles.pages}>{book.totalPages} pages</p>
 
-            <button className={styles.addBtn} onClick={onButtonClick}>
+            <button
+              className={styles.addBtn}
+              onClick={async () => {
+                // если `onButtonClick` передан — используем его
+                if (onButtonClick) {
+                  await onButtonClick(); // он сам добавит книгу и перенаправит
+                } else {
+                  // fallback: просто добавление
+                  await handleAddToLibrary();
+                }
+              }}
+            >
               {buttonText}
             </button>
           </>
