@@ -22,35 +22,45 @@ export default function MyBook() {
 
   return (
     <div className={styles.myBookWrapper}>
-      <h2 className={styles.title}>Reading: {book.title}</h2>
+      <AddReading bookId={book._id} className={styles.myBookReading} />
+      <div className={styles.myBookTabs}>
+        <div className={styles.tabs}>
+          <h3 className={styles.diaryTitle}>
+            {activeTab === "diary" ? "Diary" : "Statistics"}
+          </h3>
 
-      <AddReading bookId={book._id} />
+          <div className={styles.buttonIcons}>
+            <button
+              className={`${styles.tabButton} ${
+                activeTab === "diary" ? styles.active : ""
+              }`}
+              onClick={() => setActiveTab("diary")}
+            >
+              <svg className={styles.icon}>
+                <use href="/sprite.svg#icon-hourglass" />
+              </svg>
+            </button>
 
-      <div className={styles.tabs}>
-        <button
-          className={`${styles.tabButton} ${
-            activeTab === "diary" ? styles.active : ""
-          }`}
-          onClick={() => setActiveTab("diary")}
-        >
-          Diary
-        </button>
-        <button
-          className={`${styles.tabButton} ${
-            activeTab === "statistics" ? styles.active : ""
-          }`}
-          onClick={() => setActiveTab("statistics")}
-        >
-          Statistics
-        </button>
-      </div>
+            <button
+              className={`${styles.tabButton} ${
+                activeTab === "statistics" ? styles.active : ""
+              }`}
+              onClick={() => setActiveTab("statistics")}
+            >
+              <svg className={styles.icon}>
+                <use href="/sprite.svg#icon-pie-chart" />
+              </svg>
+            </button>
+          </div>
+        </div>
 
-      <div className={styles.tabContent}>
-        {activeTab === "diary" ? (
-          <Diary bookId={book._id} />
-        ) : (
-          <Statistics bookId={book._id} />
-        )}
+        <div className={styles.tabContent}>
+          {activeTab === "diary" ? (
+            <Diary bookId={book._id} />
+          ) : (
+            <Statistics bookId={book._id} />
+          )}
+        </div>
       </div>
     </div>
   );

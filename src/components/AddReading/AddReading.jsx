@@ -23,7 +23,7 @@ export default function AddReading({ bookId }) {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    if (/^\d*$/.test(value)) setPage(value); // Только цифры
+    if (/^\d*$/.test(value)) setPage(value);
   };
 
   const handleSubmit = async (e) => {
@@ -51,7 +51,6 @@ export default function AddReading({ bookId }) {
         await dispatch(startReading({ bookId, page: pageNum })).unwrap();
         toast.success("Started reading");
       } else {
-        // ✅ Валидация: finishPage > startPage
         if (pageNum <= currentProgress?.startPage) {
           toast.error("The finish page can't be less than the start page");
           return;
@@ -79,16 +78,17 @@ export default function AddReading({ bookId }) {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <label className={styles.label}>
-        Page:
+      <p className={styles.label}>{isReading ? "Stop page:" : "Start page:"}</p>
+      <div className={styles.readingInputWrapper}>
+        <span className={styles.readingLabel}>Page number:</span>
         <input
           type="text"
           value={page}
           onChange={handleChange}
-          className={styles.input}
-          placeholder="Enter page number"
+          className={styles.readingInput}
+          placeholder="0"
         />
-      </label>
+      </div>
 
       <button type="submit" className={styles.button}>
         {isReading ? "To stop" : "To start"}

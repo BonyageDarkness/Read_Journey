@@ -38,15 +38,19 @@ export default function Statistics() {
         <div className={styles.circleWrapper}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="116"
-            height="116"
             viewBox="0 0 116 116"
             fill="none"
+            className={styles.circleSvg}
           >
-            <path
-              d="M116 59C116 91.0325 90.0325 117 58 117C25.9675 117 0 91.0325 0 59C0 26.9675 25.9675 1 58 1C90.0325 1 116 26.9675 116 59ZM10.44 59C10.44 85.2667 31.7333 106.56 58 106.56C84.2667 106.56 105.56 85.2667 105.56 59C105.56 32.7333 84.2667 11.44 58 11.44C31.7333 11.44 10.44 32.7333 10.44 59Z"
-              fill="#1F1F1F"
+            <circle
+              cx="58"
+              cy="59"
+              r="48"
+              stroke="#1F1F1F"
+              strokeWidth="10"
+              fill="none"
             />
+
             <circle
               cx="58"
               cy="59"
@@ -69,8 +73,10 @@ export default function Statistics() {
 
       <div className={styles.legend}>
         <div className={styles.box} />
-        <span className={styles.percent}>{progressPercent}%</span>
-        <span className={styles.pages}>{totalReadPages} pages read</span>
+        <div className={styles.legendPercent}>
+          <span className={styles.percent}>{progressPercent}%</span>
+          <span className={styles.pages}>{totalReadPages} pages read</span>
+        </div>
       </div>
     </div>
   );
