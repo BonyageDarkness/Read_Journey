@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import styles from "./ReadingPage.module.scss";
 import { toast } from "react-toastify";
 
-import Header from "../../components/Header/header";
+import Header from "../../components/header/Header";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import CurrentBook from "../../components/CurrentBook/CurrentBook";
 

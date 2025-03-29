@@ -96,7 +96,6 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Контейнер с аватаром и бургер-меню */}
       <div className={styles.menuContainer}>
         {isLoggedIn && user?.name && (
           <div className={styles.userAvatar}>
