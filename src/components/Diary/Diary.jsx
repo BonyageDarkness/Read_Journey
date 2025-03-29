@@ -4,7 +4,6 @@ import {
   selectReadingDiary,
   selectCurrentReadingBook,
 } from "../../redux/reading/readingSelectors";
-import { Scrollbars } from "react-custom-scrollbars-2";
 
 import { deleteReadingEntry } from "../../redux/reading/readingOperations";
 import { toast } from "react-toastify";
