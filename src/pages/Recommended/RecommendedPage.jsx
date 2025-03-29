@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import styles from "./RecommendedPage.module.scss";
 
-import Header from "../../components/Header/Header";
+import Header from "../../components/Header/header";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import RecommendedBooks from "../../components/RecommendedBooks/RecommendedBooks";
 
