@@ -15,7 +15,6 @@ export default function Header() {
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
   };
-
   const handleLogout = () => {
     dispatch(logout());
     localStorage.removeItem("token");
