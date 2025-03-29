@@ -38,6 +38,9 @@
     padding: 16px 14px;
     height: 44px;
   }
+  @include desktop {
+    height: 50px;
+  }
 }
 
 .readingLabel {

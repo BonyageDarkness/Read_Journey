@@ -9,6 +9,7 @@
   background: #1f1f1f;
   display: flex;
   flex-direction: column;
+
   gap: 20px;
   @include tablet {
     max-width: 704px;

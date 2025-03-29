@@ -10,6 +10,7 @@
   padding: 40px 20px;
   flex-direction: column;
   margin: 0 auto;
+  position: relative;
   @include tablet {
     max-width: 704px;
     padding: 40px;
@@ -152,4 +153,12 @@
   font-weight: 500;
   line-height: 12px; /* 120% */
   letter-spacing: -0.2px;
+}
+
+.loaderWrapper {
+  width: 120px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

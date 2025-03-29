@@ -14,6 +14,9 @@
     max-width: 321px;
     padding: 28px;
   }
+  @include desktop {
+    padding: 20px;
+  }
 }
 
 .circleWrapper {
@@ -23,6 +26,10 @@
   @media (min-width: 768px) {
     width: 138px;
     height: 138px;
+  }
+  @include desktop {
+    width: 189px;
+    height: 189px;
   }
 }
 
@@ -60,6 +67,10 @@
     width: 138px;
     height: 138px;
   }
+  @include desktop {
+    width: 189px;
+    height: 189px;
+  }
 }
 
 .percentageText {
@@ -67,7 +78,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: #f9f9f9;
   font-size: 16px;
   font-weight: 700;
   line-height: 16px; /* 100% */
@@ -85,6 +96,9 @@
   text-align: center;
   display: flex;
   gap: 15px;
+  @include desktop {
+    margin-top: 10px;
+  }
 }
 
 .box {
@@ -101,6 +115,9 @@
   align-items: self-start;
   flex-direction: column;
   gap: 4px;
+  @include desktop {
+    gap: 8px;
+  }
 }
 
 .percent {

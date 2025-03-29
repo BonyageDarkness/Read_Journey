@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import Loader from "../Loader/Loader";
 import styles from "./SignForm.module.scss";
 import iphone1x from "../../img/main/iPhone15Black1.jpg";
 import iphone2x from "../../img/main/iPhone15Black1@2x.jpg";
@@ -157,7 +157,7 @@ export default function LoginForm() {
             className={styles.buttonLogin}
             disabled={isLoading}
           >
-            {isLoading ? "Logging in..." : "Login"}
+            {isLoading ? <Loader /> : "Login"}
           </button>
 
           <p className={styles.switch}>

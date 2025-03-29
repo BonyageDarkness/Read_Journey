@@ -2,13 +2,13 @@ import styles from "./Dashboard.module.scss";
 import book1x from "../../img/dashboard/book.png";
 import book2x from "../../img/dashboard/book@2x.png";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { setFilters } from "../../redux/filters/filtersSlice";
 import AddBookForm from "../AddBookForm/AddBookForm";
 import RecommendedBlock from "../RecommendedBlock/RecommendedBlock";
 import MyBook from "../MyBook/MyBook";
 
-export default function Dashboard({ page }) {
+export default function Dashboard({ page, inputRef, pageInput, setPageInput }) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const dispatch = useDispatch();
@@ -121,7 +121,11 @@ export default function Dashboard({ page }) {
       )}
       {page === "reading" && (
         <>
-          <MyBook />
+          <MyBook
+            inputRef={inputRef}
+            pageInput={pageInput}
+            setPageInput={setPageInput}
+          />
         </>
       )}
     </div>

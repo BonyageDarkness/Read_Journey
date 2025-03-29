@@ -12,6 +12,7 @@ import {
   selectTitleFilter,
   selectAuthorFilter,
 } from "../../redux/filters/filtersSelectors";
+import Loader from "../Loader/Loader";
 
 import BookModal from "../BookModal/BookModal";
 import styles from "./RecommendedBooks.module.scss";
@@ -113,7 +114,9 @@ export default function RecommendedBooks() {
       </div>
       <div className={styles.recommendedBooksList}>
         {isLoading ? (
-          <p>Loading...</p>
+          <div className={styles.loaderWrapper}>
+            <Loader />
+          </div>
         ) : (
           <ul className={styles.booksList}>
             {books.map((book) => (

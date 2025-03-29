@@ -277,3 +277,10 @@
     color: #f9f9f9;
   }
 }
+.loaderWrapper {
+  width: 120px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

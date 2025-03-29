@@ -7,11 +7,14 @@ import { selectReadingStatus } from "../../redux/readingFilter/readingFilterSele
 import { setReadingStatus } from "../../redux/readingFilter/readingFilterSlice";
 import { setCurrentReadingBook } from "../../redux/reading/readingSlice";
 import { fetchUserBooks } from "../../redux/books/booksOperations";
-import { selectUserBooks } from "../../redux/books/booksSelectors";
+import {
+  selectUserBooks,
+  selectBooksLoading,
+} from "../../redux/books/booksSelectors";
 import { removeBookFromLibrary } from "../../redux/books/booksOperations";
 import book1x from "../../img/dashboard/book.png";
 import book2x from "../../img/dashboard/book@2x.png";
-
+import Loader from "../Loader/Loader";
 import { toast } from "react-toastify";
 import styles from "./MyLibraryBooks.module.scss";
 import BookModal from "../BookModal/BookModal";
@@ -21,6 +24,7 @@ export default function MyLibraryBooks() {
   const dispatch = useDispatch();
   const status = useSelector(selectReadingStatus);
   const books = useSelector(selectUserBooks);
+  const isLoading = useSelector(selectBooksLoading);
   const [selectedBook, setSelectedBook] = useState(null);
   const [bookDetails, setBookDetails] = useState({});
   const navigate = useNavigate();
@@ -110,53 +114,60 @@ export default function MyLibraryBooks() {
           </Listbox>
         </div>
       </div>
-      {books.length === 0 && (
-        <div className={styles.booksCount}>
-          <div className={styles.booksCountWrapper}>
-            <img
-              className={styles.dashboardBookImg}
-              src={book1x}
-              srcSet={`${book1x} 1x, ${book2x} 2x`}
-              alt="book"
-            />
-          </div>
-          <p className={styles.booksCountText}>
-            <span>To start training, add</span> some of your books
-            <span> or from the recommended ones</span>
-          </p>
+      {isLoading ? (
+        <div className={styles.loaderWrapper}>
+          <Loader />
         </div>
-      )}
-
-      <ul className={styles.booksList}>
-        {filteredBooks.map((book) => (
-          <li key={book._id} className={styles.bookCard}>
-            <div className={styles.bookImageWrapper}>
-              <img
-                src={bookDetails[book._id]?.imageUrl}
-                alt={book.title}
-                className={styles.bookImage}
-                onClick={() => handleOpenModal(book)}
-              />
-            </div>
-
-            <div className={styles.bookInfo}>
-              <div className={styles.bookDetails}>
-                <h3 className={styles.bookTitle}>{book.title}</h3>
-                <p className={styles.bookAuthor}>{book.author}</p>
+      ) : (
+        <>
+          {books.length === 0 ? (
+            <div className={styles.booksCount}>
+              <div className={styles.booksCountWrapper}>
+                <img
+                  className={styles.dashboardBookImg}
+                  src={book1x}
+                  srcSet={`${book1x} 1x, ${book2x} 2x`}
+                  alt="book"
+                />
               </div>
-              <button
-                className={styles.removeButton}
-                onClick={() => handleRemove(book._id)}
-              >
-                <svg className={styles.removeIcon}>
-                  {" "}
-                  <use href="/public/sprite.svg#icon-trash-2"></use>
-                </svg>
-              </button>
+              <p className={styles.booksCountText}>
+                <span>To start training, add</span> some of your books
+                <span> or from the recommended ones</span>
+              </p>
             </div>
-          </li>
-        ))}
-      </ul>
+          ) : (
+            <ul className={styles.booksList}>
+              {filteredBooks.map((book) => (
+                <li key={book._id} className={styles.bookCard}>
+                  <div className={styles.bookImageWrapper}>
+                    <img
+                      src={bookDetails[book._id]?.imageUrl}
+                      alt={book.title}
+                      className={styles.bookImage}
+                      onClick={() => handleOpenModal(book)}
+                    />
+                  </div>
+
+                  <div className={styles.bookInfo}>
+                    <div className={styles.bookDetails}>
+                      <h3 className={styles.bookTitle}>{book.title}</h3>
+                      <p className={styles.bookAuthor}>{book.author}</p>
+                    </div>
+                    <button
+                      className={styles.removeButton}
+                      onClick={() => handleRemove(book._id)}
+                    >
+                      <svg className={styles.removeIcon}>
+                        <use href="/public/sprite.svg#icon-trash-2" />
+                      </svg>
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
+      )}
 
       {selectedBook && (
         <BookModal

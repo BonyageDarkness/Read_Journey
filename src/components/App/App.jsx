@@ -1,10 +1,12 @@
 import { lazy, Suspense, useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, Bounce } from "react-toastify";
 import { logout } from "../../redux/auth/authSlice";
 import { selectToken } from "../../redux/auth/authSelectors";
 import { setAuthToken } from "../../api/axiosInstance";
+import PrivateRoute from "../PrivateRoute";
+import Loader from "../Loader/Loader";
 
 import styles from "./App.module.scss";
 
@@ -49,14 +51,45 @@ function App() {
         theme="dark"
         transition={Bounce}
       />{" "}
-      <Suspense fallback={<div>Загрузка...</div>}>
+      <Suspense
+        fallback={
+          <div className={styles.loaderWrapper}>
+            <Loader />
+          </div>
+        }
+      >
         <div className={styles.container}>
           <Routes>
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  token ? (
+                  <Navigate to="/recommended" replace />
+                  ) : (
+                  <Navigate to="/signin" replace />)
+                </PrivateRoute>
+              }
+            />
             <Route path="/signin" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/recommended" element={<RecommendedPage />} />
-            <Route path="/library" element={<LibraryPage />} />
-            <Route path="/reading" element={<ReadingPage />} />
+            <Route
+              path="/library"
+              element={
+                <PrivateRoute>
+                  <LibraryPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/reading"
+              element={
+                <PrivateRoute>
+                  <ReadingPage />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </div>
       </Suspense>
